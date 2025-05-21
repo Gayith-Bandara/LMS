@@ -13,6 +13,7 @@ export const AppContextProvider = (props) => {
 
     const [allCourses, setAllCourses] = useState([]);//use state hook 
     const [isEducator, setIsEducator] = useState(true);//use state hook 
+    const [enrolledCourses, setEnrolledCourses] = useState(true);//use state hook 
 
     //set all courses
     const fetchAllCourses = async ()=>{
@@ -21,7 +22,8 @@ export const AppContextProvider = (props) => {
 
     //call the fetchAllCourses funtion(everytime this project renders this useEffect react method will be called)
     useEffect(()=>{
-        fetchAllCourses(), []
+        fetchAllCourses()
+        fetchEnrolledCourses(), []
     })
 
     //function to calculate average rating of course
@@ -62,8 +64,13 @@ export const AppContextProvider = (props) => {
         return lectureCount;
     }
 
+    //function to get enrolled courses
+    const fetchEnrolledCourses = async () => {
+        setEnrolledCourses(dummyCourses);
+    }
+
     const value = {
-        currency, allCourses, navigate, calculateRating, isEducator, setIsEducator, calculateChapterTime, calculateCourseDuration, calculateNumberOfLectures
+        currency, allCourses, navigate, calculateRating, isEducator, setIsEducator, calculateChapterTime, calculateCourseDuration, calculateNumberOfLectures, enrolledCourses, setEnrolledCourses, fetchEnrolledCourses
     }
 
     return (

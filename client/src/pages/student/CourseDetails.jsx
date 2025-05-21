@@ -18,10 +18,11 @@ const CourseDetails = () =>{
     const {allCourses, calculateRating,  calculateChapterTime, calculateCourseDuration, calculateNumberOfLectures, currency} = useContext(AppContext);
 
     const fetchCourseData = async ()=>{
-        setCourseData(allCourses.find(course=> course._id === id))
+        const findCourse = allCourses.find(course => course._id === id)
+        setCourseData(findCourse)
     }
 
-    useEffect(()=>{fetchCourseData()},[])
+    useEffect(()=>{fetchCourseData()},[allCourses])
 
     const toggleSection = (index) => {
         setOpenSection((prev)=>(
@@ -108,7 +109,6 @@ const CourseDetails = () =>{
             {/* right column */}
             <div className='max-w-course-card z-10 shadow-custom-card md:rounded-none rounded-t overflow-hidden bg-white min-3-{300px} sm:min-w-{420px}'>
                 {/* <img src={courseData.courseThumbnail} alt="" /> */}
-                {console.log(playerData.videoId)}
                 {
                     playerData ? <Youtube videoId={playerData.videoId} opts={{playerVars: {autoplay : 1}}} iframeClassName='w-full aspect-video'></Youtube>: <img src={courseData.courseThumbnail} alt="" />
                 }
